@@ -7,7 +7,11 @@ export class TodoRoutes {
 
         const todosController = new TodoController();
 
-        router.get('/api/todos', todosController.getTodos);
+        router.get('/todos', todosController.getTodos);
+        router.get('/todos/:id', todosController.getTodoById);
+        router.post('/todos', todosController.createTodo);
+        router.put('/todos/:id', todosController.updateTodo);
+        router.delete('/todos/:id', todosController.deleteTodo);
 
         return router;
 
