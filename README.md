@@ -6,7 +6,7 @@ Instalación de dependencias
 - Docker (Opcional) [Documentación](https://docs.docker.com/engine/install/)
 - PostgreSQL 15 (Opcional) [Documentación](https://www.postgresql.org/download/)
 - Node JS Versión 22.3 (Requerido) [Documentación](https://nodejs.org/en/download/package-manager/)
-- Prisma (Requerido) [Documentación](https://www.prisma.io/docs/getting-started?_gl=1*3lzlv3*_up*MQ..*_gs*MQ..)
+- Prisma (Requerido) [Documentación](https://www.prisma.io/docs/getting-started/quickstart-sqlite)
 
 
 1. Instalar las dependencias de node
