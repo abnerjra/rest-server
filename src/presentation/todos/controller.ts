@@ -46,7 +46,7 @@ export class TodoController {
 
         todos.push(newTodo)
 
-        res.status(201).json({ message: 'Todo created', title });
+        res.status(201).json({ message: 'Todo created' });
         return;
     }
 
