@@ -9,7 +9,7 @@ export class TodoController {
         const todos = await prisma.todo.findMany();
         res.status(200).json({
             severity: 'success',
-            message: 'Información de regsistros',
+            message: 'Todos found',
             data: todos
         });
         return;
@@ -37,7 +37,7 @@ export class TodoController {
         }
         res.status(200).json({
             severity: 'success',
-            message: 'Información de regsistro',
+            message: 'Todo found',
             data: todo
         });
         return;
@@ -48,7 +48,7 @@ export class TodoController {
         if (!title) {
             res.status(400).json({
                 severity: 'error',
-                message: 'title is required',
+                message: 'Title is required',
                 data: null
             });
             return;
@@ -63,7 +63,7 @@ export class TodoController {
 
         res.status(201).json({
             severity: 'error',
-            message: 'Registro creado',
+            message: 'Todo created',
             data: todo.id
         });
         return;
@@ -85,7 +85,7 @@ export class TodoController {
         if (!title) {
             res.status(400).json({
                 severity: 'error',
-                message: 'title is required',
+                message: 'Title is required',
                 data: null
             });
             return;
@@ -114,7 +114,7 @@ export class TodoController {
 
         res.status(200).json({
             severity: 'error',
-            message: 'Registro actualizado',
+            message: 'Todo updated',
             data: todo.id
         });
         return;
@@ -151,7 +151,7 @@ export class TodoController {
 
         res.status(200).json({
             severity: 'success',
-            message: 'Registro eliminado',
+            message: 'Todo deleted',
             data: null
         });
         return;
