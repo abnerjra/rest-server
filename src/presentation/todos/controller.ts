@@ -71,7 +71,7 @@ export class TodoController {
 
     public updateTodo = async (req: Request, res: Response) => {
         const id = +req.params.id
-        const { title } = req.body
+        const { title, completedAt } = req.body
 
         if (isNaN(id)) {
             res.status(404).json({
@@ -108,7 +108,7 @@ export class TodoController {
             where: { id },
             data: {
                 title,
-                completedAt: (req.body.completedAt) ? new Date(req.body.completedAt) : null,
+                completedAt: (completedAt) ? new Date(completedAt) : null,
             }
         })
 
