@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { prisma } from "../../data/postgresql";
+import { CreateTodoDto, UpdateTodoDto } from "../../domain/dtos";
 
 export class TodoController {
     //* Dependency Injection
@@ -44,21 +45,19 @@ export class TodoController {
     }
 
     public createTodo = async (req: Request, res: Response) => {
-        const { title, completedAt } = req.body
-        if (!title) {
+        const [error, createTodoDto] = CreateTodoDto.create(req.body)
+
+        if (error) {
             res.status(400).json({
                 severity: 'error',
-                message: 'Title is required',
+                message: error,
                 data: null
             });
             return;
         }
 
         const todo = await prisma.todo.create({
-            data: {
-                title,
-                completedAt: (completedAt) ? new Date(completedAt) : null,
-            }
+            data: createTodoDto!
         })
 
         res.status(201).json({
@@ -71,24 +70,16 @@ export class TodoController {
 
     public updateTodo = async (req: Request, res: Response) => {
         const id = +req.params.id
-        const { title, completedAt } = req.body
 
-        if (isNaN(id)) {
+        const [error, updateTodoDto] = UpdateTodoDto.create({ ...req.body, id })
+
+        if (error) {
             res.status(404).json({
                 severity: 'error',
-                message: 'ID argument is not a number',
+                message: error,
                 data: null
             });
             return
-        }
-
-        if (!title) {
-            res.status(400).json({
-                severity: 'error',
-                message: 'Title is required',
-                data: null
-            });
-            return;
         }
 
         const checkTodo = await prisma.todo.findFirst({
@@ -106,10 +97,7 @@ export class TodoController {
 
         const todo = await prisma.todo.update({
             where: { id },
-            data: {
-                title,
-                completedAt: (completedAt) ? new Date(completedAt) : null,
-            }
+            data: updateTodoDto!.values
         })
 
         res.status(200).json({
