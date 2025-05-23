@@ -26,7 +26,7 @@ export class TodoDatasourceImpl implements TodoDatasource {
             where: { id }
         })
 
-        if (!todo) throw new Error(`Todo with ID ${id} not found`);
+        if (!todo) throw (`Todo with ID ${id} not found`);
 
         return TodoEntity.fromObject(todo);
     }
